@@ -1,0 +1,482 @@
+/* Template Selector Overlay - Skeletor Neobrutalist Design */
+body #template-selector,
+html #template-selector,
+#template-selector {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(26, 15, 33, 0.95) !important;
+    backdrop-filter: blur(3px) !important;
+    display: none !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 2147483647 !important;
+    font-family: 'Courier New', monospace !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* Show when style attribute contains flex */
+#template-selector[style*="flex"] {
+    display: flex !important;
+}
+
+/* Main modal container - SHARP NEOBRUTALIST BOX */
+#template-selector .template-selector-modal {
+    background: linear-gradient(180deg, #2a1b35 0%, #1a0f21 50%, #0f0812 100%) !important;
+    border: 3px solid #72468e !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    width: 500px !important;
+    max-width: 90vw !important;
+    max-height: 80vh !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    outline: none !important;
+    font-family: 'Courier New', monospace !important;
+    box-sizing: border-box !important;
+}
+
+/* Header - NEOBRUTALIST SHARP */
+#template-selector .template-selector-header {
+    background: #72468e !important;
+    border-bottom: 2px solid #f3ed28 !important;
+    border-radius: 0 !important;
+    padding: 16px 20px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+}
+
+#template-selector .template-selector-header::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -2px !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 2px !important;
+    background: linear-gradient(90deg, #f3ed28 0%, transparent 100%) !important;
+}
+
+/* Header icon - YOUR ACTUAL ICON */
+#template-selector .template-selector-header::before {
+    content: "" !important;
+    width: 20px !important;
+    height: 20px !important;
+    background: #f3ed28 url('icon48.png') center/cover no-repeat !important;
+    border: 1px solid #000 !important;
+    border-radius: 0 !important;
+    margin-right: 8px !important;
+    flex-shrink: 0 !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+}
+
+#template-selector .template-selector-header h3 {
+    margin: 0 !important;
+    font-size: 14px !important;
+    color: #f3ed28 !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    text-align: left !important;
+    font-family: 'Courier New', monospace !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+#template-selector .template-selector-header h3::before {
+    content: "SKELETOR - " !important;
+    color: #f3ed28 !important;
+}
+
+/* Close button - NEOBRUTALIST SHARP */
+#template-selector .template-close-btn {
+    background: #f3ed28 !important;
+    border: 2px solid #f3ed28 !important;
+    border-radius: 0 !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    color: #72468e !important;
+    padding: 0 !important;
+    width: 28px !important;
+    height: 28px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.1s ease !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+    outline: none !important;
+    flex-shrink: 0 !important;
+    font-weight: 700 !important;
+    font-family: 'Courier New', monospace !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+#template-selector .template-close-btn:hover {
+    background: transparent !important;
+    color: #f3ed28 !important;
+    box-shadow: inset 0 0 0 1px #f3ed28 !important;
+}
+
+#template-selector .template-close-btn:active {
+    transform: translate(1px, 1px) !important;
+}
+
+/* Search section - NEOBRUTALIST CONTAINER */
+#template-selector .template-search {
+    padding: 16px 20px !important;
+    border-bottom: 1px solid #333 !important;
+    background: #1a1a1a !important;
+    border: 2px solid #333 !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid #333 !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+}
+
+#template-selector .template-search::before {
+    content: 'SEARCH' !important;
+    position: absolute !important;
+    top: -8px !important;
+    left: 8px !important;
+    background: #1a0f21 !important;
+    color: #f3ed28 !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    padding: 0 4px !important;
+    letter-spacing: 1px !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+#template-selector .template-search input,
+#template-selector #template-search-input {
+    width: 100% !important;
+    padding: 8px !important;
+    border: 1px solid #555 !important;
+    border-radius: 0 !important;
+    background: #222 !important;
+    color: #e8e8e8 !important;
+    font-size: 12px !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+    margin: 0 !important;
+    height: auto !important;
+    line-height: 1.4 !important;
+    font-family: 'Courier New', monospace !important;
+    transition: all 0.1s ease !important;
+}
+
+#template-selector .template-search input:focus,
+#template-selector #template-search-input:focus {
+    outline: none !important;
+    border-color: #f3ed28 !important;
+    box-shadow: 0 0 0 1px #f3ed28 !important;
+}
+
+#template-selector .template-search input::placeholder,
+#template-selector #template-search-input::placeholder {
+    color: #666 !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+/* Options container - NEOBRUTALIST LIST */
+#template-selector .template-options,
+#template-selector #template-options {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    max-height: 350px !important;
+    background: #1a1a1a !important;
+    border: 2px solid #333 !important;
+    border-radius: 0 !important;
+    border-top: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+}
+
+#template-selector .template-options::before {
+    content: 'TEMPLATES' !important;
+    position: absolute !important;
+    top: 0px !important;
+    left: 8px !important;
+    background: #1a0f21 !important;
+    color: #f3ed28 !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    padding: 2px 4px !important;
+    letter-spacing: 1px !important;
+    font-family: 'Courier New', monospace !important;
+    z-index: 10 !important;
+}
+
+/* Individual template options - SHARP BRUTALIST ITEMS */
+#template-selector .template-option {
+    padding: 12px !important;
+    border-bottom: 1px solid #333 !important;
+    border-radius: 0 !important;
+    cursor: pointer !important;
+    transition: background-color 0.1s ease !important;
+    background: transparent !important;
+    display: block !important;
+    width: auto !important;
+    margin: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+}
+
+/* First template option gets extra top padding to clear the label */
+#template-selector .template-option:first-child {
+    padding-top: 24px !important;
+}
+
+#template-selector .template-option:hover {
+    background: #252525 !important;
+    border-left: 3px solid #f3ed28 !important;
+    padding-left: 11px !important;
+}
+
+#template-selector .template-option:hover:first-child {
+    padding-top: 24px !important;
+}
+
+#template-selector .template-option:active {
+    transform: none !important;
+}
+
+#template-selector .template-option:last-child {
+    border-bottom: none !important;
+}
+
+#template-selector .template-option-name {
+    font-weight: 700 !important;
+    color: #f3ed28 !important;
+    margin-bottom: 4px !important;
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    font-family: 'Courier New', monospace !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+#template-selector .template-option-preview {
+    color: #aaa !important;
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+    font-family: 'Courier New', monospace !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Message Toast - NEOBRUTALIST NOTIFICATION */
+body .template-message,
+html .template-message,
+.template-message {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    background: #72468e !important;
+    border: 2px solid #f3ed28 !important;
+    border-radius: 0 !important;
+    color: #f3ed28 !important;
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    z-index: 2147483648 !important;
+    box-shadow: none !important;
+    animation: skeletorSlideIn 0.2s ease-out !important;
+    outline: none !important;
+    margin: 0 !important;
+    font-family: 'Courier New', monospace !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    max-width: 300px !important;
+    word-wrap: break-word !important;
+    box-sizing: border-box !important;
+}
+
+.template-message::before {
+    content: "💀 " !important;
+    margin-right: 6px !important;
+    color: #f3ed28 !important;
+}
+
+@keyframes skeletorSlideIn {
+    from {
+        transform: translateX(100%) !important;
+        opacity: 0 !important;
+    }
+    to {
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Scrollbar styling - NEOBRUTALIST */
+#template-selector .template-options::-webkit-scrollbar {
+    width: 8px !important;
+}
+
+#template-selector .template-options::-webkit-scrollbar-track {
+    background: #1a1a1a !important;
+}
+
+#template-selector .template-options::-webkit-scrollbar-thumb {
+    background: #333 !important;
+    border: 1px solid #555 !important;
+    border-radius: 0 !important;
+}
+
+#template-selector .template-options::-webkit-scrollbar-thumb:hover {
+    background: #f3ed28 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    #template-selector .template-selector-modal {
+        width: 95vw !important;
+        margin: 0 !important;
+    }
+    
+    #template-selector .template-selector-header {
+        padding: 12px 16px !important;
+    }
+    
+    #template-selector .template-search {
+        padding: 12px 16px !important;
+    }
+    
+    #template-selector .template-option {
+        padding: 10px 12px !important;
+    }
+    
+    #template-selector .template-option:hover {
+        padding-left: 11px !important;
+    }
+}
+
+/* Force all text to be readable colors */
+#template-selector * {
+    box-sizing: border-box !important;
+    font-family: 'Courier New', monospace !important;
+    border-radius: 0 !important;
+    color: #e8e8e8 !important;
+}
+
+#template-selector .template-selector-modal * {
+    color: #e8e8e8 !important;
+    text-decoration: none !important;
+    border-radius: 0 !important;
+}
+
+/* Specific color overrides for key elements */
+#template-selector .template-selector-header h3,
+#template-selector .template-selector-header h3::before,
+#template-selector .template-search::before,
+#template-selector .template-options::before,
+#template-selector .template-option-name {
+    color: #f3ed28 !important;
+}
+
+#template-selector .template-close-btn {
+    color: #72468e !important;
+}
+
+#template-selector .template-close-btn:hover {
+    color: #f3ed28 !important;
+}
+
+#template-selector .template-option-preview {
+    color: #aaa !important;
+}
+
+#template-selector .template-search input,
+#template-selector #template-search-input {
+    color: #e8e8e8 !important;
+}
+
+.template-message {
+    color: #f3ed28 !important;
+}
+
+
+/* Search filtering visibility controls */
+body #template-selector .template-option.hidden,
+html #template-selector .template-option.hidden,
+#template-selector .template-option.hidden {
+    display: none !important;
+}
+
+body #template-selector .template-option.visible,
+html #template-selector .template-option.visible,
+#template-selector .template-option.visible {
+    display: block !important;
+}
+
+/* Empty search state message */
+#template-selector .search-empty {
+    display: block !important;
+    padding: 20px !important;
+    text-align: center !important;
+    color: #aaa !important;
+    font-family: 'Courier New', monospace !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+/* Defensive CSS to prevent layout breaking on other sites */
+#template-selector * {
+    flex: none !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: auto !important;
+    align-self: auto !important;
+    justify-self: auto !important;
+    grid-area: auto !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
+    float: none !important;
+    clear: none !important;
+}
+
+/* Ensure modal structure is protected from external CSS */
+#template-selector {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+}
+
+#template-selector .template-selector-modal {
+    flex: none !important;
+    flex-direction: column !important;
+}
