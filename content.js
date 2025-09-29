@@ -10,12 +10,13 @@ class TemplateInjector {
         await this.loadTemplates()
         this.bindEvents()
         this.createTemplateSelector()
-        this.injectCSS()
+        this.injectCSS() // Add CSS injection
     }
 
+    // Add CSS injection method
     injectCSS() {
         if (document.getElementById('template-injector-styles')) {
-            return
+            return // Already injected
         }
 
         const style = document.createElement('style')
@@ -53,15 +54,6 @@ class TemplateInjector {
     }
 
     bindEvents() {
-        // Listen for extension command (for Linux compatibility)
-        if (browser.commands && browser.commands.onCommand) {
-            browser.commands.onCommand.addListener((command) => {
-                if (command === "trigger-template") {
-                    this.handleShortcut()
-                }
-            })
-        }
-
         // Listen for keyboard shortcut
         document.addEventListener('keydown', e => {
             if (e.ctrlKey && e.shiftKey && e.key === 'T') {
@@ -168,7 +160,7 @@ class TemplateInjector {
 
             if (!this.isTextInput(this.activeInput)) {
                 this.showMessage(
-                    'Please click in a text input field first, then press Ctrl+Shift+T or Ctrl+Shift+Y'
+                    'Please click in a text input field first, then press Ctrl+Shift+T'
                 )
                 return
             }
@@ -177,7 +169,7 @@ class TemplateInjector {
         // Double-check that we have a valid input
         if (!this.isTextInput(this.activeInput)) {
             this.showMessage(
-                'Please click in a text input field first, then press Ctrl+Shift+T or Ctrl+Shift+Y'
+                'Please click in a text input field first, then press Ctrl+Shift+T'
             )
             return
         }
@@ -202,47 +194,20 @@ class TemplateInjector {
         const selector = document.createElement('div')
         selector.id = 'template-selector'
         selector.className = 'template-selector'
-
-        // Create modal structure safely
-        const modal = document.createElement('div')
-        modal.className = 'template-selector-modal'
-
-        // Header
-        const header = document.createElement('div')
-        header.className = 'template-selector-header'
-        
-        const title = document.createElement('h3')
-        title.textContent = 'Select a Template'
-        
-        const closeBtn = document.createElement('button')
-        closeBtn.className = 'template-close-btn'
-        closeBtn.type = 'button'
-        closeBtn.textContent = '×'
-        
-        header.appendChild(title)
-        header.appendChild(closeBtn)
-
-        // Search section
-        const searchDiv = document.createElement('div')
-        searchDiv.className = 'template-search'
-        
-        const searchInput = document.createElement('input')
-        searchInput.type = 'text'
-        searchInput.placeholder = 'Search templates...'
-        searchInput.id = 'template-search-input'
-        
-        searchDiv.appendChild(searchInput)
-
-        // Options container
-        const optionsDiv = document.createElement('div')
-        optionsDiv.className = 'template-options'
-        optionsDiv.id = 'template-options'
-
-        // Assemble modal
-        modal.appendChild(header)
-        modal.appendChild(searchDiv)
-        modal.appendChild(optionsDiv)
-        selector.appendChild(modal)
+        selector.innerHTML = `
+            <div class="template-selector-modal">
+                <div class="template-selector-header">
+                    <h3>Select a Template</h3>
+                    <button class="template-close-btn" type="button">&times;</button>
+                </div>
+                <div class="template-search">
+                    <input type="text" placeholder="Search templates..." id="template-search-input">
+                </div>
+                <div class="template-options" id="template-options">
+                    <!-- Templates will be inserted here -->
+                </div>
+            </div>
+        `
 
         document.body.appendChild(selector)
 
@@ -544,20 +509,10 @@ class TemplateInjector {
         this.templates.forEach((template, index) => {
             const option = document.createElement('div')
             option.className = 'template-option visible' // Add visible class by default
-
-            // Create name element safely
-            const nameDiv = document.createElement('div')
-            nameDiv.className = 'template-option-name'
-            nameDiv.textContent = template.name // Safe text assignment
-
-            // Create preview element safely
-            const previewDiv = document.createElement('div')
-            previewDiv.className = 'template-option-preview'
-            previewDiv.textContent = this.getPreview(template.content) // Safe text assignment
-
-            // Assemble option
-            option.appendChild(nameDiv)
-            option.appendChild(previewDiv)
+            option.innerHTML = `
+                <div class="template-option-name">${this.escapeHtml(template.name)}</div>
+                <div class="template-option-preview">${this.escapeHtml(this.getPreview(template.content))}</div>
+            `
 
             option.addEventListener('click', () => {
                 this.insertTemplate(template)
@@ -609,27 +564,22 @@ class TemplateInjector {
                     const paragraphs = content
                         .split('\n')
                         .filter(p => p.trim() !== '')
-                    
-                    // Clear existing content
-                    this.activeInput.innerHTML = ''
-                    
+                    let htmlContent = ''
+
                     if (paragraphs.length === 0) {
-                        const p = document.createElement('p')
-                        p.appendChild(document.createElement('br'))
-                        this.activeInput.appendChild(p)
+                        htmlContent = '<p><br></p>'
+                    } else if (paragraphs.length === 1) {
+                        htmlContent = `<p>${paragraphs[0]}</p>`
                     } else {
-                        paragraphs.forEach(paragraphText => {
-                            const p = document.createElement('p')
-                            p.textContent = paragraphText // Safe text assignment
-                            this.activeInput.appendChild(p)
-                        })
+                        htmlContent = paragraphs
+                            .map(p => `<p>${p}</p>`)
+                            .join('')
                     }
+
+                    this.activeInput.innerHTML = htmlContent
                 } else {
                     // For empty content (close), just clear
-                    const p = document.createElement('p')
-                    p.appendChild(document.createElement('br'))
-                    this.activeInput.innerHTML = '' // Safe to clear
-                    this.activeInput.appendChild(p)
+                    this.activeInput.innerHTML = '<p><br></p>'
                 }
 
                 // Hide the placeholder
@@ -726,39 +676,18 @@ class TemplateInjector {
                         throw new Error('execCommand returned false')
                     }
                 } catch (execError) {
-                    // Safe manual insertion
+                    // Manual insertion fallback
                     if (
                         this.activeInput.innerHTML.trim() === '' ||
                         this.activeInput.innerHTML === '<br>'
                     ) {
-                        // Create safe content
-                        this.activeInput.innerHTML = '' // Safe to clear
-                        const textNode = document.createTextNode(content)
-                        this.activeInput.appendChild(textNode)
-                        
-                        // Convert newlines to <br> elements safely
-                        const contentWithBreaks = content.split('\n')
-                        this.activeInput.innerHTML = '' // Safe to clear
-                        contentWithBreaks.forEach((line, index) => {
-                            if (index > 0) {
-                                this.activeInput.appendChild(document.createElement('br'))
-                            }
-                            if (line) {
-                                this.activeInput.appendChild(document.createTextNode(line))
-                            }
-                        })
+                        this.activeInput.innerHTML = content.replace(
+                            /\n/g,
+                            '<br>'
+                        )
                     } else {
-                        // Append safely
-                        this.activeInput.appendChild(document.createElement('br'))
-                        const lines = content.split('\n')
-                        lines.forEach((line, index) => {
-                            if (index > 0) {
-                                this.activeInput.appendChild(document.createElement('br'))
-                            }
-                            if (line) {
-                                this.activeInput.appendChild(document.createTextNode(line))
-                            }
-                        })
+                        this.activeInput.innerHTML +=
+                            '<br>' + content.replace(/\n/g, '<br>')
                     }
                     insertionSuccessful = true
                 }
@@ -829,7 +758,7 @@ class TemplateInjector {
         // Create temporary message
         const messageEl = document.createElement('div')
         messageEl.className = 'template-message'
-        messageEl.textContent = message // Safe text assignment
+        messageEl.textContent = message
         document.body.appendChild(messageEl)
 
         setTimeout(() => {

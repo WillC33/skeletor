@@ -8,16 +8,6 @@
     "activeTab",
     "<all_urls>"
   ],
-  "commands": {
-    "trigger-template": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+Y",
-        "mac": "Command+Shift+Y",
-        "linux": "Ctrl+Shift+Y"
-      },
-      "description": "Open template selector"
-    }
-  },
   "background": {
     "scripts": [
       "background.js"
