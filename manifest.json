@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Skeletor: Template Manager",
-  "version": "0.2",
+  "version": "0.2.1",
   "browser_specific_settings": {
     "gecko": {
       "id": "{5d902262-9887-417d-9634-fec05b3564c8}",
