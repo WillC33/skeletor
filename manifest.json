@@ -1,18 +1,32 @@
 {
   "manifest_version": 2,
   "name": "Skeletor: Template Manager",
-  "version": "0.1",
+  "version": "0.2",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{5d902262-9887-417d-9634-fec05b3564c8}",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
   "description": "Manage and insert text templates across websites",
   "permissions": [
     "storage",
     "activeTab",
     "<all_urls>"
   ],
+  "commands": {
+    "insert-template": {
+      "suggested_key": {
+        "default": "Ctrl+Alt+I",
+        "mac": "Command+Alt+I"
+      },
+      "description": "Open template selector"
+    }
+  },
   "background": {
-    "scripts": [
-      "background.js"
-    ],
-    "persistent": false
+    "page": "background.html"
   },
   "content_scripts": [
     {
