@@ -82,7 +82,7 @@ class BackgroundManager {
     // Handle any migration logic here if needed
   }
 
-  async handleMessage(message, sender, sendResponse) {
+  async handleMessage(message, _, sendResponse) {
     try {
       switch (message.action) {
         case 'getTemplates':
