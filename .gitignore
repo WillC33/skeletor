@@ -1,5 +1,4 @@
 # web-ext artifacts
 .amo-upload-uuid
 .web-extension-id
-background.html
 web-ext-artifacts/
